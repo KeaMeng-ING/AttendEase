@@ -1,0 +1,7 @@
+tver ban register
+
+authentication ready
+
+doing leaveTypes
+
+now doing leavetype request
