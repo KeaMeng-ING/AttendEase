@@ -61,6 +61,11 @@ class User extends Authenticatable
         return $this->hasMany(LeaveType::class);
     }
 
+    public function leaveRequest()
+    {
+        return $this->hasMany(LeaveRequest::class);
+    }
+
     protected static function booted()
     {
         static::created(function ($user) {
