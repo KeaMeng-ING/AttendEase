@@ -41,7 +41,8 @@ class UserFactory extends Factory
             ]),
             'email' => fake()->unique()->safeEmail(),
             'phone_number' => fake()->optional(0.8)->numerify('+1##########'), // 80% chance, US format
-            'password' => Hash::make('password'), // Default password for all users
+            // 'password' => Hash::make('password'), // Default password for all users
+            'password' => 12345678, // Default password for all users
             'role' => fake()->randomElement(['employee', 'manager', 'admin']),
             'status' => fake()->randomElement(['active', 'inactive']),
             'remember_token' => Str::random(10),

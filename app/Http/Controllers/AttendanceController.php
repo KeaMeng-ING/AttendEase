@@ -13,16 +13,17 @@ class AttendanceController extends Controller
     public function index(Request $request)
     {
         // Get the authenticated user
-        $user = $request->user();
+        // $user = $request->user();
+        $user = \App\Models\User::find(11); // Replace 1 with the desired 
 
         // Get the date from the query parameter (default to today's date if not provided)
-        $date = $request->query('date', now()->toDateString());
+        // $date = $request->query('date', now()->toDateString());
 
         // Retrieve attendance records for the logged-in user on the specified date
         $attendances = $user->attendances()
-            ->where('attendance_date', $date)
+            // ->where('attendance_date', $date)
             ->latest()
-            ->take(10)
+            ->take(3)
             ->get();
 
         // Return the attendance records as JSON

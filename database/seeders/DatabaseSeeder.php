@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Attendance;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -14,5 +15,6 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::factory(50)->create();
+        Attendance::factory(200)->create();
     }
 }
