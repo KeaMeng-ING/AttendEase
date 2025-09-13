@@ -13,8 +13,8 @@ class AttendanceController extends Controller
     public function index(Request $request)
     {
         // Get the authenticated user
-        // $user = $request->user();
-        $user = \App\Models\User::find(11); // Replace 1 with the desired 
+        $user = $request->user();
+        // $user = \App\Models\User::find(11); // Replace 1 with the desired 
 
         // Get the date from the query parameter (default to today's date if not provided)
         // $date = $request->query('date', now()->toDateString());
@@ -55,9 +55,13 @@ class AttendanceController extends Controller
             'clock_in' => $clockInTime,
             'attendance_date' => $attendanceDate,
             'status' => $status,
+
         ]);
 
-        return response()->json($attendance, 201);
+        return response()->json([
+            'attendance_id' => $attendance->id,
+            'attendance' => $attendance,
+        ], 201);
     }
 
     /**
@@ -77,6 +81,25 @@ class AttendanceController extends Controller
         $attendance = $attendance->update([
             'clock_out' => $clockOutTime,
         ]);
+
+        return response()->json($attendance, 200);
+    }
+
+    public function showCurrent(Request $request)
+    {
+        $user = $request->user();
+        $today = now()->toDateString();
+
+        // Retrieve today's attendance record for the logged-in user
+        $attendance = $user->attendances()
+            ->where('attendance_date', $today)
+            ->first();
+
+        if (!$attendance) {
+            return response()->json([
+                'message' => 'No attendance record found for today.',
+            ], 404);
+        }
 
         return response()->json($attendance, 200);
     }

@@ -32,8 +32,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanc
 // Attendance
 Route::post("/clock_in", [AttendanceController::class, 'store'])->middleware('auth:sanctum');
 Route::post("/clock_out/{attendance}", [AttendanceController::class, 'update'])->middleware('auth:sanctum');
-Route::get("/attendance", [AttendanceController::class, 'index']);
-// ->middleware('auth:sanctum');
+Route::get("/attendance", [AttendanceController::class, 'index'])->middleware('auth:sanctum');
+Route::get("/attendance/current", [AttendanceController::class, 'showCurrent'])->middleware('auth:sanctum');
 
 // Leave Types
 // To be updated

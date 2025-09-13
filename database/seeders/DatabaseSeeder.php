@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Attendance;
+use App\Models\LeaveRequest;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -16,5 +17,6 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(50)->create();
         Attendance::factory(200)->create();
+        LeaveRequest::factory(100)->create();
     }
 }

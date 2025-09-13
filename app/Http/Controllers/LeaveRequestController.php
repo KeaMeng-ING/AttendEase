@@ -12,9 +12,14 @@ class LeaveRequestController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return LeaveRequest::all();
+        $user = $request->user();
+
+        // Correctly retrieve the leave requests using the relationship method
+        $leaveRequests = $user->leaveRequests()->get();
+
+        return response()->json($leaveRequests, 200);
     }
 
     /**
