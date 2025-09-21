@@ -103,4 +103,23 @@ class AttendanceController extends Controller
 
         return response()->json($attendance, 200);
     }
+
+    public function showDate(Request $request)
+    {
+        $user = $request->user();
+        $date = $request->query('date', now()->toDateString());
+
+        // Retrieve the attendance record for the specified date
+        $attendance = $user->attendances()
+            ->where('attendance_date', $date)
+            ->first();
+
+        if (!$attendance) {
+            return response()->json([
+                'message' => 'No attendance record found.',
+            ], 404);
+        }
+
+        return response()->json($attendance, 200);
+    }
 }

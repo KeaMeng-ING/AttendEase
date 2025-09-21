@@ -34,9 +34,11 @@ Route::post("/clock_in", [AttendanceController::class, 'store'])->middleware('au
 Route::post("/clock_out/{attendance}", [AttendanceController::class, 'update'])->middleware('auth:sanctum');
 Route::get("/attendance", [AttendanceController::class, 'index'])->middleware('auth:sanctum');
 Route::get("/attendance/current", [AttendanceController::class, 'showCurrent'])->middleware('auth:sanctum');
+Route::get("/attendance/{attendance}", [AttendanceController::class, 'showDate'])->middleware('auth:sanctum');
 
 // Leave Types
 // To be updated
+Route::get("/leave_type", [LeaveTypeController::class, 'index'])->middleware('auth:sanctum');
 Route::post("/user/{user}/leave_type/{leaveType}", [LeaveTypeController::class, 'update'])->middleware('auth:sanctum');
 Route::post("/user/{user}/leave_type/{leaveType}/use", [LeaveTypeController::class, 'incrementUse'])->middleware('auth:sanctum');
 

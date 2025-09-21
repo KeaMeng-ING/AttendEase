@@ -19,4 +19,10 @@ class LeaveRequest extends Model
         'status',
         'reviewed_by',
     ];
+
+
+    public function leaveType()
+    {
+        return $this->belongsTo(LeaveType::class, 'leave_type_id');
+    }
 }

@@ -42,4 +42,12 @@ class LeaveTypeController extends Controller
             'data' => $leaveType,
         ]);
     }
+
+    public function index(Request $request)
+    {
+        $user = $request->user();
+        $leaveTypes = $user->leaveTypes; // Assuming a user has many leave types
+
+        return response()->json($leaveTypes, 200);
+    }
 }

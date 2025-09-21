@@ -16,8 +16,11 @@ class LeaveRequestController extends Controller
     {
         $user = $request->user();
 
-        // Correctly retrieve the leave requests using the relationship method
-        $leaveRequests = $user->leaveRequests()->get();
+        // Eager load the leaveType relationship and order by most recent
+        $leaveRequests = $user->leaveRequests()
+            ->with('leaveType')
+            ->orderBy('created_at', 'desc') // Order by the most recent
+            ->get();
 
         return response()->json($leaveRequests, 200);
     }
